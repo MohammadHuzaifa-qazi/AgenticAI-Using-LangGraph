@@ -10,6 +10,8 @@ A hands-on collection of agentic AI workflows built with **LangGraph** — from 
 | [`01_Simple_LLM_based`](./01_Simple_LLM_based) | LLM-powered Q&A with Groq & Llama 3.1 | External LLM integration, single-node graph, prompt engineering |
 | [`02_Sequential_Workflow`](./02_Sequential_Workflow) | Prompt chaining — outline → blog → scoring | Sequential `StateGraph`, prompt injection, 3-node pipeline |
 | [`03_Parallel_workflow`](./03_Parallel_workflow) | HR screening pipeline & essay evaluation | Parallel nodes, structured output, multi-angle evaluation |
+| [`04_Conditonal_workflow`](./04_Conditonal_workflow) | Sentiment-based review routing | `add_conditional_edges`, branching, Pydantic structured output |
+| [`05_Iterative_Workflow`](./05_Iterative_Workflow) | Generate → evaluate → optimize loop | Iterative cycle, LLM-as-a-judge, max-iteration guard |
 
 ## 🧠 What is LangGraph?
 
@@ -68,6 +70,12 @@ AgenticAI-Using-LangGraph/
 │   └── Simple_LLm_based_workflow.ipynb
 ├── 02_Sequential_Workflow/
 │   └── Sequential_workflow.ipynb
+├── 03_Parallel_workflow/
+│   └── hr_screening_pipeline.py
+├── 04_Conditonal_workflow/
+│   └── main.py
+├── 05_Iterative_Workflow/
+│   └── main.py
 └── README.md
 ```
 
