@@ -187,11 +187,47 @@ res = workflow.invoke(None, {"configurable": {"thread_id": 1}})
 
 This is the "Git of conversations" — you can see history, checkout an old commit, edit it, and continue from there.
 
+## 🛡️ Fault Tolerance — recovering from interruptions
+
+The `fault_tolerance.ipynb` notebook shows the second huge benefit of checkpoints: **a graph that crashed or was interrupted can resume from exactly where it stopped** — no node is run twice, and none is skipped.
+
+### How it works
+
+`step2` deliberately sleeps for 20 seconds to simulate a slow/long task:
+
+```python
+def step2(state: fault_state):
+    print("Step2 is loading........")
+    time.sleep(20)
+    print("Step2 is successfully........")
+    return {"step2": "Done"}
+```
+
+If you interrupt the run (`KeyboardInterrupt`) during that sleep, the run dies mid-flight. Without a checkpointer that would be a disaster — you'd restart from zero. With `InMemorySaver`, every completed node is already saved.
+
+### Resuming after a failure
+
+```python
+# 1. See the saved state despite the interruption
+workflow.get_state(config)
+
+# 2. See the whole timeline
+list(workflow.get_state_history(config))
+
+# 3. Resume: invoke with None → continues from the last checkpoint, NOT from START
+output2 = workflow.invoke(None, config)
+```
+
+The magic is in step 3: passing `None` as the input means "no new input, just continue the existing thread". LangGraph loads the last checkpoint, sees that `step1` already finished, and runs **only** the remaining work (`step2`). After resuming, `get_state` shows a complete state and the history shows the new checkpoints appended.
+
+> **Key idea:** a checkpointer turns a crash into a "pause". The graph remembers how far it got, so retry/continuation is cheap and idempotent — the core of production fault tolerance, retries, and human-in-the-loop approvals.
+
 ## 📂 Files
 
 | File | Purpose |
 |---|---|
 | `checkpointers1.ipynb` | Full walkthrough: persistence, threads, state history, time travel |
+| `fault_tolerance.ipynb` | Fault tolerance: interrupt a run, then resume from the last checkpoint |
 | `main.py` | Runnable script: two isolated threads + state/history inspection |
 | `test_history.py` | Compact version: invoke, read latest state, count history entries |
 | `config.py` | Shared model setup (`ChatGroq` + `groq_api_key`) |
