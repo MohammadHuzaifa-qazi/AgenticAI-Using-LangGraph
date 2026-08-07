@@ -12,6 +12,7 @@ A hands-on collection of agentic AI workflows built with **LangGraph** — from 
 | [`03_Parallel_workflow`](./03_Parallel_workflow) | HR screening pipeline & essay evaluation | Parallel nodes, structured output, multi-angle evaluation |
 | [`04_Conditonal_workflow`](./04_Conditonal_workflow) | Sentiment-based review routing | `add_conditional_edges`, branching, Pydantic structured output |
 | [`05_Iterative_Workflow`](./05_Iterative_Workflow) | Generate → evaluate → optimize loop | Iterative cycle, LLM-as-a-judge, max-iteration guard |
+| [`06_Persistence`](./06_Persistence) | Stateful graphs with memory | Checkpointers, `thread_id`, state history, time travel |
 
 ## 🧠 What is LangGraph?
 
@@ -76,6 +77,12 @@ AgenticAI-Using-LangGraph/
 │   └── main.py
 ├── 05_Iterative_Workflow/
 │   └── main.py
+├── 06_Persistence/
+│   ├── checkpointers1.ipynb
+│   ├── main.py
+│   ├── test_history.py
+│   ├── config.py
+│   └── README.md
 └── README.md
 ```
 
