@@ -13,6 +13,7 @@ A hands-on collection of agentic AI workflows built with **LangGraph** — from 
 | [`04_Conditonal_workflow`](./04_Conditonal_workflow) | Sentiment-based review routing | `add_conditional_edges`, branching, Pydantic structured output |
 | [`05_Iterative_Workflow`](./05_Iterative_Workflow) | Generate → evaluate → optimize loop | Iterative cycle, LLM-as-a-judge, max-iteration guard |
 | [`06_Persistence`](./06_Persistence) | Stateful graphs with memory | Checkpointers, `thread_id`, state history, time travel |
+| [`projects/chatbot`](./projects/chatbot) | HuzaifaBot — personal Streamlit chatbot | LangGraph + Groq + Streamlit UI, multi-turn memory via checkpointer |
 
 ## 🧠 What is LangGraph?
 
@@ -53,6 +54,12 @@ For LLM-based notebooks you will also need:
 pip install langchain-groq
 ```
 
+For the chatbot UI (`projects/chatbot`) you will additionally need:
+
+```bash
+pip install streamlit
+```
+
 ### Running a Notebook
 
 ```bash
@@ -83,6 +90,12 @@ AgenticAI-Using-LangGraph/
 │   ├── test_history.py
 │   ├── config.py
 │   └── README.md
+├── projects/
+│   └── chatbot/
+│       ├── config.py
+│       ├── main.py
+│       ├── frontend.py
+│       └── README.md
 └── README.md
 ```
 
