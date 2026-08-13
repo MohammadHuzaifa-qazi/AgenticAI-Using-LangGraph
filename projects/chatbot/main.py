@@ -26,22 +26,3 @@ checkpoint = MemorySaver()
 workflow = graph.compile(checkpointer=checkpoint)
 
 thread_id = "1"
-# while True:
-
-    # user_msg = input("Type Here:")
-    # print("User:", user_msg)
-    # if user_msg.strip().lower() in ["exit" , "bye"]:
-    #     break
-    # config = {"configurable":{"thread_id":thread_id}}
-    # response = workflow.invoke({"message":[HumanMessage(content=user_msg)]}, config=config)
-    # print("Response:", response["message"][-1].content)
-
-# initial_state = {
-#     "message":[HumanMessage(content="Hello!")]
-# }
-
-# result = workflow.invoke(initial_state, config=config)
-# print(result["message"][-1].content)
-# message_dict = result["message"][-1]
-# print(message_dict)   # Ye ek Python dictionary dega, jise json.dumps() se JSON string bhi bana sakte hain
-
