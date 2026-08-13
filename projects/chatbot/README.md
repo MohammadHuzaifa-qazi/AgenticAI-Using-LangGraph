@@ -15,9 +15,10 @@ A stateful personal AI assistant built with **LangGraph**, **Streamlit**, and **
 
 ```
 chatbot/
-├── config.py    # ChatGroq model setup (reads groq_api_key from .env)
-├── main.py      # LangGraph workflow: state, node, graph compile + checkpointer
-├── frontend.py  # Streamlit UI: streaming chat + multi-conversation management
+├── config.py        # ChatGroq model setup (reads groq_api_key from .env)
+├── main.py          # LangGraph workflow: state, node, graph compile + checkpointer
+├── frontend.py      # Streamlit UI: streaming chat + multi-conversation management
+├── requirements.txt # Deploy dependencies (used by Streamlit Cloud / pip)
 └── README.md
 ```
 
@@ -37,7 +38,7 @@ venv\Scripts\activate      # Windows
 source venv/bin/activate   # Linux/macOS
 
 # 2. Install dependencies
-pip install streamlit langgraph langchain-groq python-dotenv
+pip install -r requirements.txt
 
 # 3. Create .env with your Groq key
 groq_api_key=your_key_here
