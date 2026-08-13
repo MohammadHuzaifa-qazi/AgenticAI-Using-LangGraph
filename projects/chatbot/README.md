@@ -53,7 +53,11 @@ streamlit run frontend.py
 ## 🧠 How It Works
 
 ### `config.py`
-Loads the Groq API key from `.env` and creates the `ChatGroq` model (`llama-3.1-8b-instant`).
+Loads the Groq API key and creates the `ChatGroq` model (`llama-3.1-8b-instant`).
+
+Key resolution order:
+1. **Streamlit Secrets** (`st.secrets["groq_api_key"]`) — used when deployed (e.g. Streamlit Cloud).
+2. **`.env` file** (`groq_api_key=...`) — used when running locally.
 
 ### `main.py` — the LangGraph workflow
 - Defines a **single-node** `StateGraph`.
@@ -99,6 +103,10 @@ res = st.write_stream(
 
 ## ⚠️ Deployment Notes
 
+- **API key**: local runs read `groq_api_key` from `.env`; on Streamlit Cloud the `.env` is not deployed, so set the key in **Secrets** (Settings → Secrets) as:
+  ```toml
+  groq_api_key = "your_key_here"
+  ```
 - `MemorySaver` stores chat history only in RAM — it is lost when the server restarts or sleeps (e.g., free-tier hosts like Streamlit Community Cloud).
 - Conversations are now isolated per session via unique `thread_id`s, but history still does not survive a server restart.
 - For production, replace `MemorySaver` with a persistent checkpointer (e.g., `PostgresSaver` from `langgraph-checkpoint-postgres`).

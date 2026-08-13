@@ -2,9 +2,21 @@ from langchain_groq import ChatGroq
 import os
 from dotenv import load_dotenv
 
-
 load_dotenv()
-api_key = os.getenv("groq_api_key")
 
-model = ChatGroq(model='llama-3.1-8b-instant' , api_key=api_key)
+def get_api_key():
+    try:
+        import streamlit as st
+        key = st.secrets.get("groq_api_key")
+        if key:
+            return key
+    except Exception:
+        pass
+    return os.getenv("groq_api_key")
 
+api_key = get_api_key()
+
+if not api_key:
+    raise ValueError("groq_api_key not found. Set it in Streamlit Secrets or .env")
+
+model = ChatGroq(model='llama-3.1-8b-instant', api_key=api_key)
