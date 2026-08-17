@@ -19,4 +19,4 @@ api_key = get_api_key()
 if not api_key:
     raise ValueError("groq_api_key not found. Set it in Streamlit Secrets or .env")
 
-model = ChatGroq(model='llama-3.1-8b-instant', api_key=api_key)
+model = ChatGroq(model='openai/gpt-oss-20b', api_key=api_key)
