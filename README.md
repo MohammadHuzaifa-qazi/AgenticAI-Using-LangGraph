@@ -13,6 +13,7 @@ A hands-on collection of agentic AI workflows built with **LangGraph** — from 
 | [`04_Conditonal_workflow`](./04_Conditonal_workflow) | Sentiment-based review routing | `add_conditional_edges`, branching, Pydantic structured output |
 | [`05_Iterative_Workflow`](./05_Iterative_Workflow) | Generate → evaluate → optimize loop | Iterative cycle, LLM-as-a-judge, max-iteration guard |
 | [`06_Persistence`](./06_Persistence) | Stateful graphs with memory | Checkpointers, `thread_id`, state history, time travel |
+| [`07_Sqlite+Memory`](./07_Sqlite+Memory) | Persistent chatbot memory on disk | `SqliteSaver`, SQLite `.db`, restart-safe state |
 | [`projects/chatbot`](./projects/chatbot) | HuzaifaBot — personal Streamlit chatbot | LangGraph + Groq + Streamlit UI, multi-turn memory via checkpointer |
 
 ## 🧠 What is LangGraph?
@@ -88,6 +89,10 @@ AgenticAI-Using-LangGraph/
 │   ├── checkpointers1.ipynb
 │   ├── main.py
 │   ├── test_history.py
+│   ├── config.py
+│   └── README.md
+├── 07_Sqlite+Memory/
+│   ├── main.py
 │   ├── config.py
 │   └── README.md
 ├── projects/
