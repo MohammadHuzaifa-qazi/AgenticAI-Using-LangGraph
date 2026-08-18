@@ -120,6 +120,34 @@ for message in res["message"]:
 
 Because the full message history for thread `"2"` is checkpointed in SQLite, the model receives all prior messages and can answer questions about its own past conversation — the classic test of a stateful chatbot.
 
+### Example Output (labeled User / AI)
+
+Running the workflow on a thread that already had several turns shows the persisted history. Every message is labeled by its type — **User** for `human` messages and **AI** for assistant messages:
+
+```
+User: Hello, My name is Huzaifa
+AI:   Hello Huzaifa! 👋 How can I assist you today?
+
+User: What is my name?
+AI:   Your name is **Huzaifa**.
+
+User: Who is Huzaifa?
+AI:   You're the person who introduced yourself as **Huzaifa**.
+      In a broader sense, "Huzaifa" is an Arabic given name meaning
+      "one who is generous" or "gift of God." It's a fairly common name
+      in Muslim-world communities.
+```
+
+Notice two things this demonstrates:
+1. **Persistence in action** — the model remembers earlier turns ("Your name is Huzaifa") because the full history was read back from `chatbot.db`, not from memory.
+2. **Labeling** — since each message object has a `.type` (`human` / `ai`), you can trivially label and render conversations however you want, e.g.:
+
+```python
+for message in res["message"]:
+    role = "User" if message.type == "human" else "AI"
+    print(f"{role}: {message.content}")
+```
+
 ## 📂 Files
 
 | File | Purpose |
